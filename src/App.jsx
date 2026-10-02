@@ -69,35 +69,39 @@ export default function App() {
   };
 
   return (
-    // Updated background to #f1ece0 and base text to #723332
     <div className="min-h-screen bg-[#f1ece0] text-[#723332] font-sans flex flex-col items-center justify-center p-4">
       
       {/* Hero Section */}
-      <div className="max-w-xl w-full text-center space-y-8 relative z-10">
-        <div className="space-y-2">
-          {/* Subtitle updated to Accent #a2ae99 */}
-          <p className="tracking-[0.2em] text-sm uppercase text-[#a2ae99] font-medium">
-            Find Your Seat
+      <div className="max-w-xl w-full text-center relative z-10">
+        <div className="space-y-4">
+          {/* New Introductory Text */}
+          <p className="tracking-[0.15em] text-xs md:text-sm uppercase text-[#4b483c] font-medium">
+            Welcome to the engagement of
           </p>
-          {/* Main title updated to Font #723332 */}
-          <h1 className="font-serif text-5xl md:text-7xl tracking-wide text-[#723332]">
-            Josh & Sneha
+          {/* Main title updated to Sneha & Josh */}
+          <h1 className="font-serif text-6xl md:text-7xl tracking-wide text-[#723332]">
+            Sneha & Josh
           </h1>
         </div>
 
         {/* Search Input Area */}
-        <div className="relative w-full max-w-md mx-auto mt-8">
+        <div className="relative w-full max-w-md mx-auto mt-12">
+          {/* Instruction for finding seat */}
+          <p className="font-serif text-2xl text-[#723332] mb-4">
+            Find Your Seat
+          </p>
+
           <div className="relative flex items-center">
-            {/* Search icon updated to Accent #a2ae99 */}
-            <Search className="absolute left-4 text-[#a2ae99] w-5 h-5" />
+            {/* Search icon updated to Accent #4b483c */}
+            <Search className="absolute left-4 text-[#4b483c] w-5 h-5" />
             <input
               type="text"
               placeholder={isLoading ? "Loading guest list..." : "Enter your full name..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               disabled={isLoading}
-              // Focus ring updated to Accent #a2ae99
-              className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 focus:border-[#a2ae99] outline-none rounded shadow-sm text-lg transition-all disabled:opacity-50 text-[#723332] placeholder:text-[#723332]/50"
+              // Focus ring updated to Accent #4b483c
+              className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 focus:border-[#4b483c] outline-none rounded shadow-sm text-lg transition-all disabled:opacity-50 text-[#723332] placeholder:text-[#723332]/50"
             />
           </div>
 
@@ -109,7 +113,7 @@ export default function App() {
                   key={index}
                   onClick={() => handleSelectGuest(guest)}
                   // Hover effect uses a slight transparency of the accent color for a smooth feel
-                  className="w-full text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-[#a2ae99]/10 transition-colors"
+                  className="w-full text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-[#4b483c]/10 transition-colors"
                 >
                   <p className="font-serif text-xl text-[#723332]">{guest.Name}</p>
                 </button>
@@ -121,7 +125,7 @@ export default function App() {
           {searchTerm.length > 0 && searchResults.length === 0 && !isLoading && (
             <div className="absolute w-full mt-2 bg-white border border-gray-200 shadow-lg rounded p-6 text-center z-50">
               <p className="text-[#723332]/70">No guest found matching "{searchTerm}"</p>
-              <p className="text-sm mt-1 text-[#a2ae99]">Try typing just your first or last name.</p>
+              <p className="text-sm mt-1 text-[#4b483c]">Try typing just your first or last name.</p>
             </div>
           )}
         </div>
@@ -130,11 +134,9 @@ export default function App() {
       {/* Household Modal Overlay */}
       {selectedHousehold && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          {/* Modal border updated to Font #723332 */}
           <div className="bg-[#f1ece0] p-8 md:p-12 rounded shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200 border-t-4 border-[#723332]">
             <button 
               onClick={() => setSelectedHousehold(null)}
-              // Close X hover updated to Font #723332
               className="absolute top-6 right-6 text-[#723332]/40 hover:text-[#723332] transition-colors"
             >
               <X className="w-6 h-6" />
@@ -144,21 +146,20 @@ export default function App() {
               <h2 className="font-serif text-3xl text-[#723332]">
                 {selectedHousehold.name}
               </h2>
-              {/* Divider updated to Accent #a2ae99 */}
-              <div className="h-px w-16 bg-[#a2ae99] mx-auto mt-4"></div>
+              {/* Divider updated to Accent #4b483c */}
+              <div className="h-px w-16 bg-[#4b483c] mx-auto mt-4"></div>
             </div>
 
             <div className="space-y-4">
               {selectedHousehold.members.map((member, index) => (
                 <div 
                   key={index} 
-                  // Separator lines in modal slightly darker for visibility against new background
                   className="flex justify-between items-center py-3 border-b border-[#723332]/10 last:border-0"
                 >
                   <span className="font-medium text-lg text-[#723332]">{member.Name}</span>
                   <div className="text-right">
-                    {/* Table label updated to Accent #a2ae99 */}
-                    <span className="text-sm text-[#a2ae99] uppercase tracking-wider block text-xs">Table</span>
+                    {/* Table label updated to Accent #4b483c */}
+                    <span className="text-sm text-[#4b483c] uppercase tracking-wider block text-xs">Table</span>
                     <span className="font-serif text-2xl text-[#723332]">{member.Table}</span>
                   </div>
                 </div>
@@ -168,8 +169,8 @@ export default function App() {
             <div className="mt-10 text-center">
               <button 
                 onClick={() => setSelectedHousehold(null)}
-                // Button background is Font #723332, hover is Accent #a2ae99
-                className="bg-[#723332] text-[#f1ece0] px-8 py-3 tracking-widest uppercase text-xs hover:bg-[#a2ae99] transition-colors rounded-sm shadow-md"
+                // Button background is Font #723332, hover is Accent #4b483c
+                className="bg-[#723332] text-[#f1ece0] px-8 py-3 tracking-widest uppercase text-xs hover:bg-[#4b483c] transition-colors rounded-sm shadow-md"
               >
                 Close
               </button>
