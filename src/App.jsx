@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Search, X } from 'lucide-react';
+import { Search, X, ChevronRight } from 'lucide-react';
 import Papa from 'papaparse';
-
-const fallbackData = `Name,Household,Table
-Josh Matthews,The Matthews Family,1
-Sneha Patel,The Patel Family,1
-Jane Doe,The Doe Family,4
-John Doe,The Doe Family,4
-Little Timmy Doe,The Doe Family,Kids Table 1`;
 
 export default function App() {
   const [guests, setGuests] = useState([]);
@@ -17,25 +10,19 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const parseCSV = (data, isString = false) => {
-      Papa.parse(data, {
-        download: !isString,
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          setGuests(results.data);
-          setIsLoading(false);
-        },
-        error: (error) => {
-          console.warn('Could not load guests.csv, using fallback data.', error);
-          if (!isString) {
-            parseCSV(fallbackData, true);
-          }
-        }
-      });
-    };
-
-    parseCSV('/guests.csv');
+    Papa.parse('/guests.csv', {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        setGuests(results.data);
+        setIsLoading(false);
+      },
+      error: (error) => {
+        console.warn('Could not load guests.csv:', error);
+        setIsLoading(false);
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -69,53 +56,51 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f1ece0] text-[#723332] font-sans flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8f5f0] via-[#f1ece0] to-[#e8e1d1] text-[#723332] font-text flex flex-col items-center justify-center p-6 selection:bg-[#723332] selection:text-[#f1ece0]">
       
-      {/* Hero Section */}
-      <div className="max-w-xl w-full text-center relative z-10">
-        <div className="space-y-4">
-          {/* New Introductory Text */}
-          <p className="tracking-[0.15em] text-xs md:text-sm uppercase text-[#4b483c] font-medium">
+      <div className="max-w-2xl w-full text-center relative z-10 flex flex-col items-center">
+        
+        {/* Hero Section */}
+        <div className="space-y-6 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <p className="font-subheading tracking-[0.25em] text-sm md:text-base uppercase text-[#4b483c] font-semibold opacity-80">
             Welcome to the engagement of
           </p>
-          {/* Main title updated to Sneha & Josh */}
-          <h1 className="font-serif text-6xl md:text-7xl tracking-wide text-[#723332]">
-            Sneha & Josh
+          <h1 className="font-title text-6xl md:text-8xl tracking-tight text-[#723332]">
+            Sneha <span className="font-text italic font-normal opacity-70 mx-1">&</span> Josh
           </h1>
         </div>
 
-        {/* Search Input Area */}
-        <div className="relative w-full max-w-md mx-auto mt-12">
-          {/* Instruction for finding seat */}
-          <p className="font-serif text-2xl text-[#723332] mb-4">
+        {/* Search Area */}
+        <div className="w-full max-w-md relative animate-in fade-in slide-in-from-bottom-6 duration-700 delay-150">
+          <label className="block font-subheading uppercase tracking-[0.15em] text-xl md:text-2xl text-[#723332] mb-6 text-center">
             Find Your Seat
-          </p>
+          </label>
 
-          <div className="relative flex items-center">
-            {/* Search icon updated to Accent #4b483c */}
-            <Search className="absolute left-4 text-[#4b483c] w-5 h-5" />
+          <div className="relative group">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#4b483c]/60 w-5 h-5 transition-colors group-focus-within:text-[#723332]" />
             <input
               type="text"
-              placeholder={isLoading ? "Loading guest list..." : "Enter your full name..."}
+              placeholder={isLoading ? "Loading guest list..." : "Enter your exact full name..."}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               disabled={isLoading}
-              // Focus ring updated to Accent #4b483c
-              className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 focus:border-[#4b483c] outline-none rounded shadow-sm text-lg transition-all disabled:opacity-50 text-[#723332] placeholder:text-[#723332]/50"
+              className="w-full pl-14 pr-6 py-4 bg-white/80 backdrop-blur-sm border border-white/40 focus:border-[#723332]/30 outline-none rounded-full shadow-[0_8px_30px_rgb(114,51,50,0.06)] text-lg font-text transition-all disabled:opacity-50 text-[#723332] placeholder:text-[#723332]/40 focus:bg-white focus:shadow-[0_8px_30px_rgb(114,51,50,0.12)]"
             />
           </div>
 
           {/* Live Search Results Dropdown */}
           {searchResults.length > 0 && (
-            <div className="absolute w-full mt-2 bg-white border border-gray-200 shadow-lg rounded max-h-64 overflow-y-auto text-left z-50">
+            <div className="absolute w-full mt-3 bg-white/95 backdrop-blur-md border border-[#f1ece0] shadow-xl rounded-2xl max-h-[60vh] overflow-y-auto text-left z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
               {searchResults.map((guest, index) => (
                 <button
                   key={index}
                   onClick={() => handleSelectGuest(guest)}
-                  // Hover effect uses a slight transparency of the accent color for a smooth feel
-                  className="w-full text-left px-6 py-4 border-b border-gray-100 last:border-0 hover:bg-[#4b483c]/10 transition-colors"
+                  className="w-full group flex items-center justify-between px-6 py-4 border-b border-[#f1ece0] last:border-0 hover:bg-[#f8f5f0] transition-colors"
                 >
-                  <p className="font-serif text-xl text-[#723332]">{guest.Name}</p>
+                  <span className="font-text text-xl text-[#723332] group-hover:translate-x-1 transition-transform">
+                    {guest.Name}
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-[#4b483c] opacity-0 group-hover:opacity-100 group-hover:-translate-x-1 transition-all" />
                 </button>
               ))}
             </div>
@@ -123,9 +108,9 @@ export default function App() {
 
           {/* No Results Message */}
           {searchTerm.length > 0 && searchResults.length === 0 && !isLoading && (
-            <div className="absolute w-full mt-2 bg-white border border-gray-200 shadow-lg rounded p-6 text-center z-50">
-              <p className="text-[#723332]/70">No guest found matching "{searchTerm}"</p>
-              <p className="text-sm mt-1 text-[#4b483c]">Try typing just your first or last name.</p>
+            <div className="absolute w-full mt-3 bg-white/95 backdrop-blur-md border border-[#f1ece0] shadow-xl rounded-2xl p-8 text-center z-50 animate-in fade-in zoom-in-95 duration-200">
+              <p className="text-xl text-[#723332] font-title mb-2">No guest found</p>
+              <p className="text-sm font-text text-[#4b483c]/80">Try typing just your first or last name.</p>
             </div>
           )}
         </div>
@@ -133,44 +118,42 @@ export default function App() {
 
       {/* Household Modal Overlay */}
       {selectedHousehold && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-          <div className="bg-[#f1ece0] p-8 md:p-12 rounded shadow-2xl max-w-md w-full relative animate-in fade-in zoom-in duration-200 border-t-4 border-[#723332]">
+        <div className="fixed inset-0 bg-[#4b483c]/20 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-in fade-in duration-300">
+          <div className="bg-[#fcfbf9]/95 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full relative border border-white/50 animate-in zoom-in-95 duration-300">
+            
             <button 
               onClick={() => setSelectedHousehold(null)}
-              className="absolute top-6 right-6 text-[#723332]/40 hover:text-[#723332] transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full bg-[#f1ece0]/50 text-[#723332]/60 hover:text-[#723332] hover:bg-[#f1ece0] transition-all"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
             
-            <div className="text-center mb-8">
-              <h2 className="font-serif text-3xl text-[#723332]">
+            <div className="text-center mb-10 mt-2">
+              <h2 className="font-title text-3xl md:text-4xl text-[#723332]">
                 {selectedHousehold.name}
               </h2>
-              {/* Divider updated to Accent #4b483c */}
-              <div className="h-px w-16 bg-[#4b483c] mx-auto mt-4"></div>
+              <div className="h-px w-12 bg-[#723332]/20 mx-auto mt-6"></div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-2">
               {selectedHousehold.members.map((member, index) => (
                 <div 
                   key={index} 
-                  className="flex justify-between items-center py-3 border-b border-[#723332]/10 last:border-0"
+                  className="flex justify-between items-center py-4 px-2 border-b border-[#723332]/10 last:border-0 group hover:bg-[#f1ece0]/30 rounded-lg transition-colors"
                 >
-                  <span className="font-medium text-lg text-[#723332]">{member.Name}</span>
-                  <div className="text-right">
-                    {/* Table label updated to Accent #4b483c */}
-                    <span className="text-sm text-[#4b483c] uppercase tracking-wider block text-xs">Table</span>
-                    <span className="font-serif text-2xl text-[#723332]">{member.Table}</span>
+                  <span className="font-text font-bold text-lg text-[#4b483c]">{member.Name}</span>
+                  <div className="text-right flex flex-col items-end">
+                    <span className="font-subheading text-[10px] text-[#723332]/60 uppercase tracking-[0.2em] font-semibold mb-1">Table</span>
+                    <span className="font-title text-3xl text-[#723332] leading-none">{member.Table}</span>
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="mt-10 text-center">
+            <div className="mt-12 text-center">
               <button 
                 onClick={() => setSelectedHousehold(null)}
-                // Button background is Font #723332, hover is Accent #4b483c
-                className="bg-[#723332] text-[#f1ece0] px-8 py-3 tracking-widest uppercase text-xs hover:bg-[#4b483c] transition-colors rounded-sm shadow-md"
+                className="w-full bg-[#723332] text-[#f1ece0] px-8 py-4 font-subheading tracking-[0.2em] uppercase text-xs font-semibold hover:bg-[#5a2322] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all rounded-xl"
               >
                 Close
               </button>
