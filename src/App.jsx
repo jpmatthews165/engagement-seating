@@ -66,7 +66,7 @@ export default function App() {
             Welcome to the engagement of
           </p>
           <h1 className="font-title text-6xl md:text-8xl tracking-tight text-[#723332]">
-            Sneha <span className="font-text italic font-normal opacity-70 mx-1">&</span> Josh
+            Sneha & Josh
           </h1>
         </div>
 
