@@ -7,8 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'serif'],
-        sans: ['Montserrat', 'sans-serif'],
+        title: ['LeMajor', 'serif'],      // For Sneha & Josh, large headers
+        subheading: ['Ablation', 'sans-serif'], // For small caps, labels, buttons
+        text: ['Cardo', 'serif'],         // For names, search inputs, general text
       }
     },
   },
