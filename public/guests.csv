@@ -28,7 +28,7 @@ Raju Matthews,Raju Matthews,2
 Kunjumamma,Stanley Thomas,2
 Pr. Finney Thomas,Pr. Finney Thomas,3
 Jigi Thomas,Pr. Finney Thomas,3
-Christudas Devadasan,Christudas Devadasan,3
+Pr. Christudas Devadasan,Pr. Christudas Devadasan,3
 George John Kalloor,George John Kalloor,3
 Susan George,George John Kalloor,3
 Pr. A. M. Varghese,Pr. A. M. Varghese,3
@@ -44,9 +44,9 @@ Densy Thomas,Stanley Thomas,4
 Steena Joseph,Sam Joseph,4
 Sam Joseph,Sam Joseph,4
 Thomas K Oommen,Thomas K Oommen,5
-Jaicy Thomas,Jaicy Thomas,5
-Evelyn Thomas,Evelyn Thomas,5
-Ezekiel Thomas,Evelyn Thomas,5
+Jaicy Thomas,Thomas K Oommen,5
+Evelyn Thomas,Thomas K Oommen,5
+Ezekiel Thomas,Thomas K Oommen,5
 Santhosh Benjamin,Santhosh Benjamin,5
 Johnsy Benjamin,Santhosh Benjamin,5
 Jagdish Mitter,Jagdish Mitter,5
@@ -88,8 +88,8 @@ Godwin Gladison,Godwin Gladison,9
 Benson Gladison,Godwin Gladison,9
 Isaiah Alex,Daniel Alex,9
 Christopher James,Jason James,9
-Pr Matthew Zecheriah,Pr Matthew Zecheriah,10
-Blessy Mathew,Pr Matthew Zecheriah,10
+Pr. Matthew Zecheriah,Pr. Matthew Zecheriah,10
+Blessy Mathew,Pr. Matthew Zecheriah,10
 Joseph Mathew,Joseph Mathew,10
 Susamma Joseph,Joseph Mathew,10
 Daniel Kochukoshy,Daniel Kochukoshy,10
@@ -113,7 +113,7 @@ Babymol Johnson,Johnson George,12
 Abraham Varghese,Abraham Varghese,12
 Sophy Abraham,Abraham Varghese,12
 Thomas Joseph,Thomas Kaithamangalam,13
-Annamma Thomas,Thomas Kaithamangalam,13
+Annamma Thomas ,Thomas Kaithamangalam,13
 Jacob N I,Jacob N I,13
 Bimmi Jacob,Jacob N I,13
 Sam Memana,Sam Memana,13
